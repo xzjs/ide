@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>ide</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but ide doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+</head>
+<body>
+<!-- Blockly -->
+<script type="text/javascript" src="js/blockly/blockly_compressed.js"></script>
+<script type="text/javascript" src="js/blockly/blocks_compressed.js"></script>
+<script type="text/javascript" src="js/blockly/python_compressed.js"></script>
+<script type="text/javascript" src="js/blockly/pseudo_compressed.js"></script>
+<script type="text/javascript" src="js/blockly/javascript_compressed.js"></script>
+<script type="text/javascript" src="js/blockly/zh-hans.js"></script>
+
+<!--Blcokpy-->
+<script type="text/javascript" src="js/blockpy/python_to_blockly.js"></script>
+<script type="text/javascript" src="js/blockpy/imported.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/class.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/comment.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/comprehensions.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/dict.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/if.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/io.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/lists.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/sets.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/loops.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/parking.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/tuple.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/turtles.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/text.js"></script>
+<script type="text/javascript" src="js/blockly_blocks/plots.js"></script>
+
+<!-- Skulpt -->
+<script type="text/javascript" src="js/skulpt/skulpt.min.js"></script>
+<script type="text/javascript" src="js/skulpt/skulpt-stdlib.js"></script>
+
+<script>
+    window.Blockly = Blockly;
+    window.PythonToBlocks = PythonToBlocks;
+</script>
+<noscript>
+    <strong>We're sorry but ide doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
 </html>
