@@ -1,24 +1,10 @@
-# ide
+# 可编辑Blockly和Python的在线IDE
 
-## Project setup
-```
-npm install
-```
+## 安装
+1. 克隆代码
+2. npm install
+3. 将`src/assets/js/python-hint.js`拷贝到`node_modules/codemirror/addon/hint/`
+4. `npm run serve`
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 效果图
+![](./image.png)
