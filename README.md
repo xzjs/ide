@@ -1,4 +1,5 @@
 # 可编辑Blockly和Python的在线IDE
+![](https://img.shields.io/badge/license-MIT-000000.svg)
 
 ## 安装
 1. 克隆代码
@@ -8,3 +9,5 @@
 
 ## 效果图
 ![](./image.png)
+
+## TODO

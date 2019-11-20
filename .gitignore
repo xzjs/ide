@@ -19,3 +19,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+public/game/index.html
+public/game/Build/game.data.unityweb
+public/game/Build/game.json
+public/game/Build/game.wasm.code.unityweb
+public/game/Build/game.wasm.framework.unityweb
+public/game/Build/UnityLoader.js
