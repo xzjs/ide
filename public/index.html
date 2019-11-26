@@ -7,45 +7,54 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>ide</title>
+    <link rel="stylesheet" href="ide/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="ide/codemirror/addon/hint/show-hint.css">
+    <link rel="stylesheet" href="ide/codemirror/theme/base16-dark.css">
 </head>
 
 <body>
-    <!-- unity -->
-    <script src="game/Build/UnityLoader.js"></script>
     <!-- Blockly -->
-    <script type="text/javascript" src="js/blockly/blockly_compressed.js"></script>
-    <script type="text/javascript" src="js/blockly/blocks_compressed.js"></script>
-    <script type="text/javascript" src="js/blockly/python_compressed.js"></script>
-    <script type="text/javascript" src="js/blockly/pseudo_compressed.js"></script>
-    <script type="text/javascript" src="js/blockly/javascript_compressed.js"></script>
-    <script type="text/javascript" src="js/blockly/zh-hans.js"></script>
+    <script type="text/javascript" src="ide/blockly/blockly_compressed.js"></script>
+    <script type="text/javascript" src="ide/blockly/blocks_compressed.js"></script>
+    <script type="text/javascript" src="ide/blockly/python_compressed.js"></script>
+    <script type="text/javascript" src="ide/blockly/pseudo_compressed.js"></script>
+    <script type="text/javascript" src="ide/blockly/javascript_compressed.js"></script>
+    <script type="text/javascript" src="ide/blockly/zh-hans.js"></script>
 
     <!--Blcokpy-->
-    <script type="text/javascript" src="js/blockpy/python_to_blockly.js"></script>
-    <script type="text/javascript" src="js/blockpy/imported.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/class.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/comment.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/comprehensions.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/dict.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/if.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/io.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/lists.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/sets.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/loops.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/parking.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/tuple.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/turtles.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/text.js"></script>
-    <script type="text/javascript" src="js/blockly_blocks/plots.js"></script>
+    <script type="text/javascript" src="ide/blockpy/python_to_blockly.js"></script>
+    <script type="text/javascript" src="ide/blockpy/imported.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/class.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/comment.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/comprehensions.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/dict.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/if.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/io.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/lists.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/sets.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/loops.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/parking.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/tuple.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/turtles.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/text.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/plots.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/compare.js"></script>
+    <script type="text/javascript" src="ide/blockly_blocks/exchange.js"></script>
 
     <!-- Skulpt -->
-    <script type="text/javascript" src="js/skulpt/skulpt.min.js"></script>
-    <script type="text/javascript" src="js/skulpt/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="ide/skulpt/skulpt.min.js"></script>
+    <script type="text/javascript" src="ide/skulpt/skulpt-stdlib.js"></script>
+
+    <!-- CodeMirror -->
+    <script type="text/javascript" src="ide/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="ide/codemirror/mode/python/python.js"></script>
+    <script type="text/javascript" src="ide/codemirror/addon/hint/show-hint.js"></script>
+    <script type="text/javascript" src="ide/codemirror/addon/hint/python-hint.js"></script>
 
     <script>
         window.Blockly = Blockly;
         window.PythonToBlocks = PythonToBlocks;
-        window.UnityLoader = UnityLoader;
+        window.CodeMirror = CodeMirror;
     </script>
     <noscript>
         <strong>We're sorry but ide doesn't work properly without JavaScript enabled. Please enable it to

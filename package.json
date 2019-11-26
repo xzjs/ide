@@ -19,6 +19,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "vue-template-compiler": "^2.6.10"
   },
   "postcss": {

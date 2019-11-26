@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <el-container style="height: 100%">
       <el-aside width="20%">
         <Flowchart></Flowchart>
@@ -78,7 +78,7 @@ export default {
       //   }
       let json = "[[1,2],[2,3]]";
       this.$emit("run");
-      gameInstance.SendMessage("Canvas", "BtnClick", json);
+      JsBridge.Bridge.sortScene.startCHange("[[1,2],[2,3]]");
     }
   },
   mounted() {}
