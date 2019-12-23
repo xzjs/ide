@@ -3,11 +3,14 @@ import App from './App.vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Vuex from 'vuex'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 Vue.use(Vuex);
+Vue.use(VueAxios,axios)
 
 new Vue({
     render: h => h(App),

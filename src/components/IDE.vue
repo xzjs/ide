@@ -1,28 +1,8 @@
 <template>
   <div>
-    <el-container style="height: 100%">
-      <el-aside width="20%">
-        <Flowchart></Flowchart>
-      </el-aside>
-      <el-container>
-        <el-header>
-          <el-button type="success" round icon="el-icon-video-play" @click="run">运行</el-button>
-        </el-header>
-        <el-main>
-          <el-row>
-            <el-col :span="12">
-              <Block ref="block" class="block" v-on:blockChange="blockChange"></Block>
-            </el-col>
-            <el-col :span="12">
-              <Code ref="code" class="code" v-on:codeChange="codeChange"></Code>
-            </el-col>
-          </el-row>
-        </el-main>
-        <el-footer height="200px">
-          <Result ref="result"></Result>
-        </el-footer>
-      </el-container>
-    </el-container>
+    <el-button type="success" round icon="el-icon-video-play" @click="run">运行</el-button>
+    <Block v-if="type=='block'" ref="code" class="block" v-on:blockChange="blockChange"></Block>
+    <Code v-else ref="code" class="code" v-on:codeChange="codeChange"></Code>
   </div>
 </template>
 
@@ -36,15 +16,15 @@ export default {
   name: "IDE",
   data() {
     return {
+      code: "",
       silenceText: false,
       silenceBlock: false
     };
   },
+  props: ["type"],
   components: {
     Block,
-    Code,
-    Result,
-    Flowchart
+    Code
   },
   methods: {
     codeChange: function(code) {
@@ -58,27 +38,26 @@ export default {
       this.silenceText = false;
     },
     blockChange: function(code) {
-      if (!this.silenceBlock) {
-        this.silenceText = true;
-        this.$refs.code.setCode(code);
-      }
+      this.code;
     },
     output: function(text) {
       this.$refs.result.result += text.replace(/</g, "&lt;");
     },
     run: function() {
-      //   let code = this.$refs.code.code;
-      //   Sk.configure({ output: this.output });
-      //   try {
-      //     Sk.misceval.asyncToPromise(function() {
-      //       Sk.importBuiltinWithBody("<stdin>", false, code, true);
-      //     });
-      //   } catch (e) {
-      //     window.console.log(e);
-      //   }
-      let json = "[[1,2],[2,3]]";
-      this.$emit("run");
-      JsBridge.Bridge.sortScene.startCHange("[[1,2],[2,3]]");
+      let code = this.$refs.code.getCode();
+      this.axios
+        .post("run", { code: code })
+        .then(response => {
+          if (response.data.length) {
+            this.$emit("run");
+            JsBridge.Bridge.sortScene.startChange(response.data);
+          } else {
+            this.$message.error("似乎不对，再试试");
+          }
+        })
+        .catch(error => {
+          this.$message.error(error.response.data);
+        });
     }
   },
   mounted() {}
@@ -111,17 +90,5 @@ export default {
 
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
-}
-
-.el-dialog {
-  margin: 0 !important;
-}
-
-.el-dialog__header {
-  display: none !important;
-}
-
-.el-dialog__body {
-  padding: 0 !important;
 }
 </style>

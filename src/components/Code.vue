@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import editor from "../assets/js/blockpy/editor";
+// import editor from "../assets/js/blockpy/editor";
 export default {
   name: "Code",
   data() {
@@ -31,7 +31,7 @@ export default {
         Ctrl: "autocomplete"
       }
     });
-    this.codemirror.setSize("100%", "calc(100vh - 260px)");
+    this.codemirror.setSize("100%", "100vh");
     this.codemirror.on("inputRead", (editor, input) => {
       if (
         input.text[0] === ";" ||
@@ -45,9 +45,14 @@ export default {
         hint: CodeMirror.pythonHint
       });
     });
-    this.codemirror.on("change", () => {
-      let newCode = this.codemirror.getValue();
-      this.$emit("codeChange", newCode);
+    // this.codemirror.on("change", () => {
+    //   let newCode = this.codemirror.getValue();
+    //   this.code = newCode;
+    //   this.$emit("codeChange", newCode);
+    // });
+    this.$notify({
+      title: "提示",
+      message: "我们提供compare()和swap()函数，可以直接使用",
     });
   },
   methods: {
@@ -57,6 +62,9 @@ export default {
       } else {
         this.codemirror.setValue(code);
       }
+    },
+    getCode() {
+      return this.codemirror.getValue();
     }
   }
 };

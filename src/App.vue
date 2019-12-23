@@ -15,24 +15,43 @@
       data-show-log="false"
       data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9"
     ></div>
-    <el-dialog title :visible.sync="codeVisible" width="100%">
-      <IDE v-on:run="codeVisible=false"></IDE>
+    <el-dialog
+      title="编写代码"
+      :visible.sync="codeVisible"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
+      :fullscreen="true"
+    >
+      <IDE v-on:run="codeVisible=false" :type="type"></IDE>
+    </el-dialog>
+    <el-dialog
+      title="总结分析"
+      :visible.sync="analysisVisible"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
+      :fullscreen="true"
+    >
+      <Analysis></Analysis>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import IDE from "./components/IDE";
+import Analysis from "./components/Analysis";
 
 export default {
   name: "App",
   data() {
     return {
-      codeVisible: false
+      codeVisible: false,
+      analysisVisible: false,
+      type: "block"
     };
   },
   components: {
-    IDE
+    IDE,
+    Analysis
   },
   mounted() {
     var loadScript = function(list, callback) {
@@ -98,12 +117,22 @@ export default {
       });
     });
     xhr.send(null);
-    window.showCode = this.showCode;
+    window.showBlock = this.showBlock;
+    window.showPython = this.showPython;
+    window.showAnalysis = this.showAnalysis;
   },
   methods: {
-    showCode() {
+    showBlock() {
       this.codeVisible = true;
+      this.type = "block";
     },
+    showPython() {
+      this.codeVisible = true;
+      this.type = "python";
+    },
+    showAnalysis() {
+      this.analysisVisible = true;
+    }
   }
 };
 </script>
@@ -125,6 +154,19 @@ body,
 
 #gameContainer {
   width: 100%;
+  height: 100%;
+}
+
+.el-dialog {
+  margin: 0 !important;
+}
+
+.el-dialog__header {
+  display: none !important;
+}
+
+.el-dialog__body {
+  padding: 0 !important;
   height: 100%;
 }
 </style>

@@ -220,9 +220,9 @@ export default {
     });
     BlockPyEditor.blockly = this.blockly;
     this.converter = new PythonToBlocks();
-    this.blockly.addChangeListener(() => {
-      this.updateBlocks();
-    });
+    // this.blockly.addChangeListener(() => {
+    //   this.updateBlocks();
+    // });
   },
   methods: {
     updateToolbox: function(only_set) {
@@ -230,8 +230,12 @@ export default {
       xml += '<category name="变量" custom="VARIABLE" colour="240"></category>';
       xml += '<category name="操作" colour="100">';
       xml += '<block type="controls_forEach"></block>';
-      xml += '<block type="compare"></block>';
+      // xml += '<block type="compare"></block>';
       xml += '<block type="exchange"></block>';
+      xml += '<block type="compare"></block>';
+      xml += '<block type="controls_if_better"></block>';
+      xml += '<block type="math_number"><field name="NUM">0</field></block>';
+      
       xml += "</category>";
       xml +=
         '<category name="列表" colour="30">' +
@@ -267,19 +271,19 @@ export default {
         "</value>" +
         "</block>" +
         "</category>";
-      xml +=
-        '<category name="值" colour="100">' +
-        '<block type="math_number"></block>' +
-        "</category>";
+      // xml +=
+      //   '<category name="值" colour="100">' +
+      //   '<block type="math_number"></block>' +
+      //   "</category>";
       xml +=
         '<category name="数学" colour="270">' +
         '<block type="math_arithmetic"></block>' +
         "</category>";
-      xml +=
-        '<category name="决策" colour="330">' +
-        '<block type="controls_if_better"></block>' +
-        '<block type="logic_compare"></block>' +
-        "</category>";
+      // xml +=
+      //   '<category name="决策" colour="330">' +
+      //   '<block type="controls_if_better"></block>' +
+      //   '<block type="logic_compare"></block>' +
+      //   "</category>";
       xml += "</xml>";
       if (only_set && !this.main.model.settings.read_only()) {
         this.blockly.updateToolbox(xml);
@@ -289,7 +293,6 @@ export default {
         return xml;
       }
     },
-    //TODO 代码转积木功能又不好使了
     setBlocks: function(python_code) {
       let xml_code = "";
       if (
@@ -330,6 +333,14 @@ export default {
         BlockPyEditor.clearDeadBlocks();
       }
       this.$emit("blockChange", newCode);
+    },
+    getCode() {
+      try {
+        let code = Blockly.Python.workspaceToCode(this.blockpy);
+        return code;
+      } catch (e) {
+        BlockPyEditor.clearDeadBlocks();
+      }
     }
   }
 };
@@ -337,7 +348,7 @@ export default {
 
 <style scoped>
 #block {
-  height: calc(100vh - 260px);
+  height: calc(100vh - 100px);
   width: 100%;
 }
 </style>
