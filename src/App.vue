@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <div
       style="margin: auto;width: 100%;height: 100%;"
       class="egret-player"
@@ -15,15 +15,39 @@
       data-show-log="false"
       data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9"
     ></div>
-    <el-dialog
-      title="编写代码"
-      :visible.sync="codeVisible"
+    <el-button
+      v-if="drawerBlock"
+      type="success"
+      icon="el-icon-video-play"
+      class="run"
+      style="font-size: 50px;margin: 0 auto;z-index:3000;"
+      circle
+      @click="run"
+    ></el-button>
+    <el-drawer
+      title="block"
+      :visible.sync="drawerBlock"
+      size="45%"
+      direction="ltr"
       :close-on-press-escape="false"
-      :close-on-click-modal="false"
-      :fullscreen="true"
+      :wrapperClosable="false"
+      :with-header="false"
+      :show-close="false"
     >
-      <IDE v-on:run="codeVisible=false" :type="type"></IDE>
-    </el-dialog>
+      <Block ref="block"></Block>
+    </el-drawer>
+    <el-drawer
+      title="python"
+      :visible.sync="drawerPython"
+      size="45%"
+      direction="rtl"
+      :close-on-press-escape="false"
+      :wrapperClosable="false"
+      :with-header="false"
+      :show-close="false"
+    >
+      <Code ref="python"></Code>
+    </el-drawer>
     <el-dialog
       title="总结分析"
       :visible.sync="analysisVisible"
@@ -39,18 +63,23 @@
 <script>
 import IDE from "./components/IDE";
 import Analysis from "./components/Analysis";
+import Block from "./components/Block";
+import Code from "./components/Code";
 
 export default {
   name: "App",
   data() {
     return {
-      codeVisible: false,
+      drawerBlock: false,
+      drawerPython: false,
       analysisVisible: false,
-      type: "block"
+      type: "block",
+      direction: "ltr"
     };
   },
   components: {
-    IDE,
+    Block,
+    Code,
     Analysis
   },
   mounted() {
@@ -123,15 +152,35 @@ export default {
   },
   methods: {
     showBlock() {
-      this.codeVisible = true;
-      this.type = "block";
+      this.drawerBlock = true;
     },
     showPython() {
-      this.codeVisible = true;
-      this.type = "python";
+      this.drawerBlock = true;
+      this.drawerPython = true;
     },
     showAnalysis() {
       this.analysisVisible = true;
+    },
+    run: function() {
+      if (this.drawerPython) {
+        var code = this.$refs.python.getCode();
+      } else {
+        var code = this.$refs.block.getCode();
+      }
+      this.axios
+        .post("run", { code: code })
+        .then(response => {
+          if (response.data.length) {
+            this.drawerBlock = false;
+            this.drawerPython = false;
+            JsBridge.Bridge.sortScene.startChange(response.data);
+          } else {
+            this.$message.error("似乎不对，再试试");
+          }
+        })
+        .catch(error => {
+          this.$message.error(error.response.data);
+        });
     }
   }
 };
@@ -143,6 +192,14 @@ body,
 #app {
   height: 100%;
   margin: 0;
+}
+
+.main {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #app {
@@ -168,5 +225,10 @@ body,
 .el-dialog__body {
   padding: 0 !important;
   height: 100%;
+}
+
+.run {
+  width: 100px;
+  height: 100px;
 }
 </style>

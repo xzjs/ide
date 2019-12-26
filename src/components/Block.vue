@@ -348,7 +348,7 @@ export default {
 
 <style scoped>
 #block {
-  height: calc(100vh - 100px);
+  height: 100%;
   width: 100%;
 }
 </style>

@@ -50,10 +50,6 @@ export default {
     //   this.code = newCode;
     //   this.$emit("codeChange", newCode);
     // });
-    this.$notify({
-      title: "提示",
-      message: "我们提供compare()和swap()函数，可以直接使用",
-    });
   },
   methods: {
     setCode: function(code) {
@@ -71,4 +67,7 @@ export default {
 </script>
 
 <style scoped>
+#code {
+  text-align: left;
+}
 </style>
